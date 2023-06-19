@@ -26,6 +26,22 @@ describe('Transações', () => {
         //Fazendo um assert para ver se tem uma linha da coluna com o texto digitado
         cy.get("tbody tr td.description").should("have.text", "Cinema")
     });
+
+    //Cenário de Teste para excluir uma saída
+    it('Excluir transação', () => {
+
+        //chama a função Cadastrar Transação e passa descrição e valor como parâmetro
+        criarTransacao("Para Excluir", 100)
+        criarTransacao("Não Excluir", 500)
+
+        //Faz a 1ª busca pela descrição da coluna, depois seleciona a linha através do "parent()", e por ultimo seleciona o ícone de exclusão da linha selecioanada
+        cy.contains(".description", "Para Excluir")
+            .parent()
+            .find('img').click()
+            
+        //verifica que a tabela tem apenas uma linha, já que duas foram cadastradas
+            cy.get('tbody tr').should("have.length", 1)
+    });
 });
 
 //Funcçao para cadastrar tanto entrado como sáida passando a descrição e valor como parâmetro
