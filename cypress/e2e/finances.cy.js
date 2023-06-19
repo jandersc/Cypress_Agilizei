@@ -34,10 +34,17 @@ describe('Transações', () => {
         criarTransacao("Para Excluir", 100)
         criarTransacao("Não Excluir", 500)
 
+        // 1ª alternativa
         //Faz a 1ª busca pela descrição da coluna, depois seleciona a linha através do "parent()", e por ultimo seleciona o ícone de exclusão da linha selecioanada
+        //cy.contains(".description", "Para Excluir")
+        //    .parent()
+        //    .find('img').click()
+
+        // 2ª alternativa
+        //Faz a 1ª busca pela descrição da coluna, depois seleciona os elementos irmãos usando o "siblings()", e por ultimo seleciona o ícone de exclusão da linha através do "children()"
         cy.contains(".description", "Para Excluir")
-            .parent()
-            .find('img').click()
+            .siblings()
+            .children('img').click()
             
         //verifica que a tabela tem apenas uma linha, já que duas foram cadastradas
             cy.get('tbody tr').should("have.length", 1)
