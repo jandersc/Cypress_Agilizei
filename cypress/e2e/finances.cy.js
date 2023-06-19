@@ -1,19 +1,26 @@
 //Chamada inicial para o site do DevFinance (verificar atalho para fazer o describe corretamente)
 describe('Transações', () => {
-    it('Cadastrar um entrada', () => {
+    
+    //Hooks para fazer o visit antes de executar cada cenário de teste
+    beforeEach(() => {
         //comando para chamar a URL 
         cy.visit("https://devfinance-agilizei.netlify.app/#")
-
+    });
+    
+    //Cenário de Teste para cadastrar uma entrada 
+    it('Cadastrar um entrada', () => {
+        
+        //chama a função Cadastrar Transação e passa descrição e valor como parâmetro
         criarTransacao("Freelance 2", 300)
 
         //Fazendo um assert para ver se tem uma linha da coluna com o texto digitado
         cy.get("tbody tr td.description").should("have.text", "Freelance 2")
     });
     
+    //Cenário de Teste para cadastrar uma saída
     it('Cadastrar uma saída', () => {
-        //comando para chamar a URL 
-        cy.visit("https://devfinance-agilizei.netlify.app/#")
 
+        //chama a função Cadastrar Transação e passa descrição e valor como parâmetro
         criarTransacao("Cinema", -55)
 
         //Fazendo um assert para ver se tem uma linha da coluna com o texto digitado
