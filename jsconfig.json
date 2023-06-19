@@ -1,0 +1,4 @@
+//Configuração para o auto complete 
+{
+    "include": ["./node_modules/cypress", "cypress/**/*.js"]
+}
